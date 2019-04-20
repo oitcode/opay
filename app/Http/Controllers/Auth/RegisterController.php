@@ -27,7 +27,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    //protected $redirectTo = '/home';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -36,7 +37,12 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+		/* Do not allow registration for guest */
+        //$this->middleware('guest');
+
+		/* Give this only for admin */
+        $this->middleware('auth');
+        $this->middleware('is_admin');
     }
 
     /**
@@ -66,6 +72,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+			'type' => User::DEFAULT_TYPE,
         ]);
     }
 }

@@ -18,3 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/* Admin routes */
+Route::get('/admin', 'AdminController@adminPanel')
+    ->middleware('is_admin')
+	->name('adminPanel');

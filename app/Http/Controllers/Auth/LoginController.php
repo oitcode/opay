@@ -37,22 +37,9 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * Get the post register / login redirect path.
-     *
-     * @return string
-     */
-    public function redirectPath()
+    /* Redirect users according to their role after login. */
+    public function redirectTo()
     {
-        if (method_exists($this, 'redirectTo')) {
-            return $this->redirectTo();
-        }
-
-	/*
-	 * Redirect admin to admin page and other users
-	 * to home page after login.
-	 */
-
 	if (auth()->user()->type === 'admin') {
 	    return '/admin';
 	} else {

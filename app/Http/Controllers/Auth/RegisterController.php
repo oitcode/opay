@@ -40,11 +40,11 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-		/* Do not allow registration for guest */
+	/* Do not allow registration for guest */
         //$this->middleware('guest');
-
-		/* Give this only for admin */
         $this->middleware('auth');
+
+        /* Give this only for admin */
         $this->middleware('is_admin');
     }
 
